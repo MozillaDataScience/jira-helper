@@ -36,9 +36,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = _get_secret("tdsmith-jira-helper-django-secret")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False if os.getenv("GAE_APPLICATION", None) else True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "tdsmith-jira-helper.wl.r.appspot.com",
+]
 
 
 # Application definition

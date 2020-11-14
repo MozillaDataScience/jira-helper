@@ -13,8 +13,8 @@
 .git
 .gitignore
 
-venv
 data
+#!include:.gitignore
 
 # Python pycache:
 __pycache__/
