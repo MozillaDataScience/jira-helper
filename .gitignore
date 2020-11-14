@@ -2,6 +2,7 @@ cloud_sql_proxy
 data/*.csv
 data/*.json
 run/
+static/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

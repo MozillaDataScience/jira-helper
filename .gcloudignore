@@ -15,6 +15,7 @@
 
 data
 #!include:.gitignore
+!static/
 
 # Python pycache:
 __pycache__/

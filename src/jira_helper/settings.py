@@ -35,13 +35,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = _get_secret("tdsmith-jira-helper-django-secret")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if os.getenv("GAE_APPLICATION", None) else True
-
-ALLOWED_HOSTS = [
-    "tdsmith-jira-helper.wl.r.appspot.com",
-]
-
+if os.getenv("GAE_APPLICATION", None):
+    DEBUG = False
+    ALLOWED_HOSTS = [
+        "tdsmith-jira-helper.wl.r.appspot.com",
+    ]
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -143,5 +144,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR.parent / "static"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
