@@ -7,26 +7,38 @@
 {% for assignee, obj in tickets_by_assignee.items %}
 <div class="row pb-4">
     <div class="col">
-
-        <h2>{{ assignee }}: {{obj.completed | length}} / {{ obj.n }} ({{obj.score}})</h2>
+        <div class="row">
+            <div class="col">{{ assignee }}</div>
+            <div class="col">{{obj.completed | length}} / {{ obj.n }} ({{obj.score}}%)</div>
+            <div class="col">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{obj.score}}%">
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <details>
             <summary>
                 Expand
             </summary>
-            To do:
-            <ul>
-                {% for ticket in obj.todo %}
-                <li> <a href="{% url 'detail' ticket.issue_key %}">{{ ticket.issue_key }}</a> {{ ticket.summary }} </li>
-                {% endfor %}
-            </ul>
+            <div class="ml-4">
+                To do:
+                <ul>
+                    {% for ticket in obj.todo %}
+                    <li> <a href="{% url 'detail' ticket.issue_key %}">{{ ticket.issue_key }}</a> {{ ticket.summary }}
+                    </li>
+                    {% endfor %}
+                </ul>
 
-            Completed:
-            <ul>
-                {% for ticket in obj.completed %}
-                <li> <a href="{% url 'detail' ticket.issue_key %}">{{ ticket.issue_key }}</a> {{ ticket.summary }} </li>
-                {% endfor %}
-            </ul>
+                Completed:
+                <ul>
+                    {% for ticket in obj.completed %}
+                    <li> <a href="{% url 'detail' ticket.issue_key %}">{{ ticket.issue_key }}</a> {{ ticket.summary }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </details>
     </div>
 </div>

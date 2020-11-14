@@ -32,13 +32,34 @@
     </div>
 </div>
 
+{% if success %}
+<div class="alert alert-success" role="alert">
+    Annotation saved.
+</div>
+{% endif %}
+{% if error %}
+<div class="alert alert-error" role="alert">
+    Something went wrong!
+</div>
+{% endif %}
+
 <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
     <div class="row">
-        <div class="col"><input class="form-control" type="submit" value="Submit"></div>
-        <div class="col"><input class="form-control" type="submit" value="Submit and go to next"></div>
+        <div class="col"><input class="form-control" type="submit" name="save" value="Save"></div>
+        {% if next_ticket %}
+        <div class="col"><input class="form-control" type="submit" name="save_and_next" value="Save and go to next">
+        </div>
+        {% else %}
+        <div class="col text-center">That's it! There's no next ticket.</div>
+        {% endif %}
     </div>
 </form>
+
+{% if next_ticket %}
+<p class="text-right pt-3">Next: <a href="{% url 'detail' next_ticket.issue_key %}">{{next_ticket.issue_key}}
+        {{next_ticket.summary}} »</a></p>
+{% endif %}
 
 {% endblock %}
