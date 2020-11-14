@@ -1,0 +1,44 @@
+{% extends "tickets/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{ticket.issue_key}}: {{ticket.summary}} {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col">
+        <h1><a href="https://jira.mozilla.com/browse/{{ticket.issue_key}}">{{ticket.issue_key}}</a>:
+            {{ ticket.summary }}</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <table class="table table-bordered" width="66%">
+            <tr>
+                <td width="50%"><b>Created</b> {{ ticket.created }}</td>
+                <td><b>Resolved</b> {{ ticket.resolved }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><b>Description:</b>
+                    <p>{{ ticket.description|safe }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><b>Last comment:</b>
+                    <p>{{ ticket.last_comment|safe }}</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="row">
+        <div class="col"><input class="form-control" type="submit" value="Submit"></div>
+        <div class="col"><input class="form-control" type="submit" value="Submit and go to next"></div>
+    </div>
+</form>
+
+{% endblock %}
