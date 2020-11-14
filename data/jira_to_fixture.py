@@ -10,6 +10,7 @@
 #     last_comment = models.TextField()
 
 import json
+import subprocess
 import sys
 
 import dateutil.parser
@@ -28,6 +29,17 @@ COLUMN_MAP = {
     "Custom field (Last Comment)": "last_comment",
 }
 
+
+def translate(s):
+    return subprocess.run(
+        ["pandoc", "-f", "textile", "-t", "html"],
+        input=s,
+        capture_output=True,
+        check=True,
+        encoding="utf-8",
+    ).stdout
+
+
 df = pd.read_csv(sys.argv[1]).fillna("")
 rows = []
 for _, row in df.iterrows():
@@ -36,6 +48,7 @@ for _, row in df.iterrows():
         "pk": row["Issue key"],
         "fields": {v: row[k] for k, v in COLUMN_MAP.items()},
     }
+    d["fields"]["description"] = translate(d["fields"]["description"])
     for k in ("created", "resolved"):
         if not d["fields"][k]:
             del d["fields"][k]
