@@ -90,10 +90,18 @@ WSGI_APPLICATION = "jira_helper.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+_cloudsql_path = (
+    Path("/cloudsql") if os.getenv("GAE_APPLICATION", None) else BASE_DIR.parent / "run"
+)
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "HOST": str(_cloudsql_path / "tdsmith-jira-helper:us-west1:jira-helper-mysql"),
+        "USER": "root",
+        "PASSWORD": _get_secret("tdsmith-jira-helper-mysql-root"),
+        "NAME": "jira_helper",
+        "OPTIONS": {"charset": "utf8mb4"},
     }
 }
 
