@@ -6,4 +6,4 @@ from tickets.models import Annotation
 class AnnotationForm(ModelForm):
     class Meta:
         model = Annotation
-        exclude = ["jira_ticket"]
+        fields = ["no_deliverable", "deliverable", "abstract", "product"]

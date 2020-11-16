@@ -14,8 +14,32 @@ class JiraTicket(models.Model):
 
 
 class Annotation(models.Model):
+    PRODUCT_CHOICES = [
+        ("desktop", "Firefox desktop"),
+        ("fenix", "Firefox for Android (Fenix)"),
+        ("fennec", "Firefox for Android (Fennec)"),
+        ("fennec_ios", "Firefox for iOS"),
+        ("other_mobile", "Other mobile/non-desktop"),
+        ("many", "Many products"),
+    ]
+
     jira_ticket = models.OneToOneField(JiraTicket, on_delete=models.CASCADE)
     abstract = models.TextField(blank=True)
     deliverable = models.URLField(
         blank=True, max_length=8192, help_text="URL to a deliverable for this ticket"
     )
+    no_deliverable = models.BooleanField(
+        "This ticket had no deliverable", default=False
+    )
+    product = models.TextField(choices=PRODUCT_CHOICES, blank=True)
+
+    def is_empty(self):
+        return not (
+            self.abstract or self.deliverable or self.no_deliverable or self.product
+        )
+
+    def save(self, *args, **kwargs):
+        if self.is_empty():
+            self.delete()
+        else:
+            super().save(*args, **kwargs)
