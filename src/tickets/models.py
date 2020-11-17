@@ -1,4 +1,5 @@
 from django.db import models
+from multiselectfield import MultiSelectField
 
 
 class JiraTicket(models.Model):
@@ -23,8 +24,23 @@ class Annotation(models.Model):
         ("many", "Many products"),
     ]
 
+    TOPICS = (
+        ("accounts", "Accounts"),
+        ("activity_stream", "Activity Stream"),
+        ("bookmarks", "Bookmarks"),
+        ("devtools", "Devtools"),
+        ("download", "Download page"),
+        ("enterprise", "Enterprise"),
+        ("heartbeat", "Heartbeat"),
+        ("nav", "Navigation"),
+        ("newtab", "New tab"),
+        ("onboarding", "Onboarding"),
+    )
+
     jira_ticket = models.OneToOneField(JiraTicket, on_delete=models.CASCADE)
-    abstract = models.TextField(blank=True)
+    abstract = models.TextField(
+        blank=True, help_text="<a href='#'>How to write an abstract</a>"
+    )
     deliverable = models.URLField(
         blank=True, max_length=8192, help_text="URL to a deliverable for this ticket"
     )
@@ -33,9 +49,21 @@ class Annotation(models.Model):
     )
     product = models.TextField(choices=PRODUCT_CHOICES, blank=True)
 
+    topic = MultiSelectField("Topics", choices=TOPICS, max_length=1024, blank=True)
+    tags = models.CharField(
+        max_length=1024,
+        blank=True,
+        help_text="Comma-separated list of any additional tags you'd like to apply.",
+    )
+
     def is_empty(self):
         return not (
-            self.abstract or self.deliverable or self.no_deliverable or self.product
+            self.abstract
+            or self.deliverable
+            or self.no_deliverable
+            or self.product
+            or self.topic
+            or self.tags
         )
 
     def save(self, *args, **kwargs):
