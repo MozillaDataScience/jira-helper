@@ -9,6 +9,7 @@ class AnnotationForm(ModelForm):
         fields = [
             "no_deliverable",
             "deliverable",
+            "artifact",
             "abstract",
             "product",
             "topic",

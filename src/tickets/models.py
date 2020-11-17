@@ -37,6 +37,12 @@ class Annotation(models.Model):
         ("onboarding", "Onboarding"),
     )
 
+    ARTIFACTS = (
+        ("dashboard", "Dashboard"),
+        ("experiment", "Experiment"),
+        ("investigation", "Investigation report"),
+    )
+
     jira_ticket = models.OneToOneField(JiraTicket, on_delete=models.CASCADE)
     abstract = models.TextField(
         blank=True, help_text="<a href='#'>How to write an abstract</a>"
@@ -56,9 +62,12 @@ class Annotation(models.Model):
         help_text="Comma-separated list of any additional tags you'd like to apply.",
     )
 
+    artifact = models.CharField(blank=True, max_length=1024, choices=ARTIFACTS)
+
     def is_empty(self):
         return not (
             self.abstract
+            or self.artifact
             or self.deliverable
             or self.no_deliverable
             or self.product
