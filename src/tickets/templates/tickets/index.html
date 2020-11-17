@@ -23,7 +23,7 @@
                 Expand
             </summary>
             <div class="ml-4">
-                To do:
+                To annotate:
                 <ul>
                     {% for ticket in obj.todo %}
                     <li> <a href="{% url 'detail' ticket.issue_key %}">{{ ticket.issue_key }}</a> {{ ticket.summary }}
@@ -31,7 +31,7 @@
                     {% endfor %}
                 </ul>
 
-                Completed:
+                Annotated:
                 <ul>
                     {% for ticket in obj.completed %}
                     <li> <a href="{% url 'detail' ticket.issue_key %}">{{ ticket.issue_key }}</a> {{ ticket.summary }}
