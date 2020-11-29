@@ -43,7 +43,10 @@ def detail(request, issue_key):
     try:
         annotation = ticket.annotation
     except Annotation.DoesNotExist:
-        pass
+        annotation = Annotation(jira_ticket=ticket)
+
+    annotation.title = annotation.title or ticket.summary
+    annotation.completed_date = annotation.completed_date or ticket.resolved.date
 
     next_ticket = None
     try:

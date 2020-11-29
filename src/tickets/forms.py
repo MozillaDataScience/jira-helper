@@ -1,4 +1,4 @@
-from django.forms import ModelForm, SelectMultiple
+from django.forms import ModelForm, SelectMultiple, DateInput
 
 from tickets.models import Annotation
 
@@ -8,6 +8,8 @@ class AnnotationForm(ModelForm):
         model = Annotation
         fields = [
             "no_deliverable",
+            "title",
+            "completed_date",
             "deliverable",
             "artifact",
             "abstract",
@@ -15,4 +17,7 @@ class AnnotationForm(ModelForm):
             "topic",
             "tags",
         ]
-        widgets = {"topic": SelectMultiple()}
+        widgets = {
+            "topic": SelectMultiple(attrs={"size": "15"}),
+            "completed_date": DateInput(attrs={"type": "date"}),
+        }

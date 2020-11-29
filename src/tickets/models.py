@@ -45,7 +45,9 @@ class Annotation(models.Model):
 
     jira_ticket = models.OneToOneField(JiraTicket, on_delete=models.CASCADE)
     abstract = models.TextField(
-        blank=True, help_text="<a href='#'>How to write an abstract</a>"
+        "tl;dr",
+        blank=True,
+        help_text="<a href='https://docs.google.com/document/d/1QiymsHOvyNoaSL5GfY_9yWMOl8qAZy6yomTld3Twfws/edit'>How to write an abstract</a>",
     )
     deliverable = models.URLField(
         blank=True, max_length=8192, help_text="URL to a deliverable for this ticket"
@@ -55,7 +57,13 @@ class Annotation(models.Model):
     )
     product = models.TextField(choices=PRODUCT_CHOICES, blank=True)
 
-    topic = MultiSelectField("Topics", choices=TOPICS, max_length=1024, blank=True)
+    topic = MultiSelectField(
+        "Topics",
+        choices=TOPICS,
+        max_length=1024,
+        blank=True,
+        help_text="Ctrl- or ⌘-click to select multiple topics",
+    )
     tags = models.CharField(
         max_length=1024,
         blank=True,
@@ -63,8 +71,16 @@ class Annotation(models.Model):
     )
 
     artifact = models.CharField(blank=True, max_length=1024, choices=ARTIFACTS)
+    title = models.CharField(max_length=1024, blank=True)
+    completed_date = models.DateField(blank=True, null=True)
 
     def is_empty(self):
+        if self.title and (self.title != self.jira_ticket.summary):
+            return False
+        if self.completed_date and (
+            self.completed_date != self.jira_ticket.resolved.date
+        ):
+            return False
         return not (
             self.abstract
             or self.artifact
