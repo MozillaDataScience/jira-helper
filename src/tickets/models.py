@@ -20,7 +20,7 @@ class Annotation(models.Model):
         ("fenix", "Firefox for Android (Fenix)"),
         ("fennec", "Firefox for Android (Fennec)"),
         ("fennec_ios", "Firefox for iOS"),
-        ("other_mobile", "Other mobile/non-desktop"),
+        ("other", "Other"),
         ("web", "Web properties"),
         ("many", "Many products"),
     ]
