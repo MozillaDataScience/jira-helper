@@ -9,27 +9,25 @@ from .forms import AnnotationForm
 def index(request):
     tickets = JiraTicket.objects.all()
     annotations = Annotation.objects.all()
-    annotated_ids = {a.jira_ticket_id for a in annotations}
+    annotated_ids = {a.jira_ticket_id: a for a in annotations}
     assignees = sorted({ticket.assignee for ticket in tickets})
     tickets_by_assignee = {}
     for a in assignees:
-        completed = sorted(
-            (t for t in tickets if t.assignee == a and t.issue_key in annotated_ids),
-            key=lambda t: t.created,
-        )
-        todo = sorted(
-            (
-                t
-                for t in tickets
-                if t.assignee == a and t.issue_key not in annotated_ids
-            ),
-            key=lambda t: t.created,
-        )
-        score = "{:.0f}".format(len(completed) / len(todo + completed) * 100)
+        mine = sorted((t for t in tickets if t.assignee == a), key=lambda t: t.created)
+        completed, in_progress, todo = [], [], []
+        for t in mine:
+            if t.issue_key not in annotated_ids:
+                todo.append(t)
+            elif annotated_ids[t.issue_key].is_complete():
+                completed.append(t)
+            else:
+                in_progress.append(t)
+        score = "{:.0f}".format(len(completed) / len(mine) * 100)
         tickets_by_assignee[a or "Unassigned"] = {
             "completed": completed,
             "todo": todo,
-            "n": len(todo) + len(completed),
+            "in_progress": in_progress,
+            "n": len(mine),
             "score": score,
         }
     return render(

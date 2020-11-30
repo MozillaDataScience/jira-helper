@@ -28,6 +28,18 @@
                     {% for ticket in obj.todo %}
                     <li> <a href="{% url 'detail' ticket.issue_key %}">{{ ticket.issue_key }}</a> {{ ticket.summary }}
                     </li>
+                    {% empty %}
+                    <li>None</li>
+                    {% endfor %}
+                </ul>
+
+                Incomplete:
+                <ul>
+                    {% for ticket in obj.in_progress %}
+                    <li> <a href="{% url 'detail' ticket.issue_key %}">{{ ticket.issue_key }}</a> {{ ticket.summary }}
+                    </li>
+                    {% empty %}
+                    <li>None</li>
                     {% endfor %}
                 </ul>
 
@@ -36,6 +48,8 @@
                     {% for ticket in obj.completed %}
                     <li> <a href="{% url 'detail' ticket.issue_key %}">{{ ticket.issue_key }}</a> {{ ticket.summary }}
                     </li>
+                    {% empty %}
+                    <li>None</li>
                     {% endfor %}
                 </ul>
             </div>

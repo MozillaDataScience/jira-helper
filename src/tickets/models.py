@@ -91,6 +91,19 @@ class Annotation(models.Model):
             or self.tags
         )
 
+    def is_complete(self):
+        if self.no_deliverable:
+            return True
+        if (
+            self.abstract
+            and self.deliverable
+            and self.product
+            and self.topic
+            and self.artifact
+        ):
+            return True
+        return False
+
     def save(self, *args, **kwargs):
         if self.is_empty():
             self.delete()
