@@ -21,26 +21,44 @@ class Annotation(models.Model):
         ("fennec", "Firefox for Android (Fennec)"),
         ("fennec_ios", "Firefox for iOS"),
         ("other_mobile", "Other mobile/non-desktop"),
+        ("web", "Web properties"),
         ("many", "Many products"),
     ]
 
     TOPICS = (
         ("accounts", "Accounts"),
         ("activity_stream", "Activity Stream"),
+        ("addons", "Add-ons"),
         ("bookmarks", "Bookmarks"),
         ("devtools", "Devtools"),
         ("download", "Download page"),
         ("enterprise", "Enterprise"),
+        ("geo", "Geolocation"),
         ("heartbeat", "Heartbeat"),
         ("nav", "Navigation"),
         ("newtab", "New tab"),
+        ("marketing", "Marketing campaign"),
         ("onboarding", "Onboarding"),
+        ("pwmgr", "Password manager"),
+        ("payments", "Payments"),
+        ("percperf", "Perceived performance"),
+        ("perf", "Performance"),
+        ("platform", "Platform"),
+        ("pocket", "Pocket"),
+        ("privacy", "Privacy"),
+        ("search", "Search"),
+        ("security", "Security"),
+        ("services", "Services"),
+        ("tp", "Tracking Protection"),
+        ("vpn", "VPN"),
     )
 
     ARTIFACTS = (
         ("dashboard", "Dashboard"),
         ("experiment", "Experiment"),
         ("investigation", "Investigation report"),
+        ("survey", "Survey"),
+        ("other", "Other"),
     )
 
     jira_ticket = models.OneToOneField(JiraTicket, on_delete=models.CASCADE)
@@ -98,7 +116,7 @@ class Annotation(models.Model):
             self.abstract
             and self.deliverable
             and self.product
-            and self.topic
+            and (self.topic or self.tags)
             and self.artifact
         ):
             return True
