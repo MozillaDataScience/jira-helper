@@ -39,6 +39,7 @@ if os.getenv("GAE_APPLICATION", None):
     DEBUG = False
     ALLOWED_HOSTS = [
         "tdsmith-jira-helper.wl.r.appspot.com",
+        "deliverables.wiki",
     ]
 else:
     DEBUG = True
