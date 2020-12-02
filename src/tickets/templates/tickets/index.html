@@ -4,6 +4,12 @@
 {% block body %}
 <h1>Tickets!</h1>
 
+<div class="row pb-4">
+    <div class="col">
+    <p>Wanna brag about something that isn't listed here? Do you have more than one deliverable to list? <a href="https://forms.gle/p4kYUDdDpMAa5nKz7">Add it here.</a></p>
+    </div>
+</div>
+
 {% for assignee, obj in tickets_by_assignee.items %}
 <div class="row pb-4">
     <div class="col">
