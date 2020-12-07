@@ -80,7 +80,7 @@ class Annotation(models.Model):
         choices=TOPICS,
         max_length=1024,
         blank=True,
-        help_text="Ctrl- or ⌘-click to select multiple topics",
+        help_text="Please specify at least one topic or tag. Ctrl- or ⌘-click to select multiple topics.",  # noqa
     )
     tags = models.CharField(
         max_length=1024,
