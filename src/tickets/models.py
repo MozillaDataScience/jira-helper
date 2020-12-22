@@ -65,7 +65,7 @@ class Annotation(models.Model):
     abstract = models.TextField(
         "tl;dr",
         blank=True,
-        help_text="<a href='https://docs.google.com/document/d/1QiymsHOvyNoaSL5GfY_9yWMOl8qAZy6yomTld3Twfws/edit'>How to write an abstract</a>",
+        help_text="<a href='https://docs.google.com/document/d/1QiymsHOvyNoaSL5GfY_9yWMOl8qAZy6yomTld3Twfws/edit'>How to write an abstract</a>",  # noqa:E501
     )
     deliverable = models.URLField(
         blank=True, max_length=8192, help_text="URL to a deliverable for this ticket"
