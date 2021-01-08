@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Submission assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container py-3">
+        <div class="row">
+            <h1>Docere submission assistant</h1>
+        </div>
+        <div class="row pt-3">
+            <form method="GET" id="docere_form">
+                <div id="div_id_title" class="form-group"> <label for="id_title" class="">
+                        Title
+                    </label>
+                    <div class=""> <input type="text" name="title" value="" maxlength="1024"
+                            class="textinput textInput form-control" id="id_title"> </div>
+                </div>
+                <div id="div_id_author" class="form-group"> <label for="id_author" class="">
+                        Author
+                    </label>
+                    <div class=""> <input type="text" name="author" value="" maxlength="1024"
+                            class="textinput textInput form-control" id="id_author" placeholder="Mo Zilla <mzilla@mozilla.com>"> </div>
+                </div>
+                <div id="div_id_completed_date" class="form-group"> <label for="id_completed_date" class="">
+                        Completed date
+                    </label>
+                    <div class=""> <input type="date" name="completed_date" value="" class="dateinput form-control"
+                            id="id_completed_date"> </div>
+                </div>
+                <div id="div_id_deliverable" class="form-group"> <label for="id_deliverable" class="">
+                        Deliverable
+                    </label>
+                    <div class=""> <input type="url" name="deliverable" maxlength="8192" class="urlinput form-control"
+                            id="id_deliverable"> <small id="hint_id_deliverable" class="form-text text-muted">URL to a
+                            deliverable
+                            for this ticket</small> </div>
+                </div>
+                <div id="div_id_artifact" class="form-group"> <label for="id_artifact" class="">
+                        Artifact
+                    </label>
+                    <div class=""> <select name="artifact" class="select form-control" id="id_artifact">
+                            <option value="" selected>---------</option>
+                            <option value="dashboard">Dashboard</option>
+                            <option value="experiment">Experiment</option>
+                            <option value="investigation">Investigation report</option>
+                            <option value="survey">Survey</option>
+                            <option value="other">Other</option>
+
+                        </select> </div>
+                </div>
+                <div id="div_id_abstract" class="form-group"> <label for="id_abstract" class="">
+                        Tl;dr
+                    </label>
+                    <div class=""> <textarea name="abstract" cols="40" rows="10" class="textarea form-control"
+                            id="id_abstract">
+        </textarea> <small id="hint_id_abstract" class="form-text text-muted"><a
+                                href='https://docs.google.com/document/d/1QiymsHOvyNoaSL5GfY_9yWMOl8qAZy6yomTld3Twfws/edit'>How
+                                to
+                                write an abstract</a></small> </div>
+                </div>
+                <div id="div_id_product" class="form-group"> <label for="id_product" class="">
+                        Product
+                    </label>
+                    <div class=""> <select name="product" class="select form-control" id="id_product">
+                            <option value="" selected>---------</option>
+                            <option value="desktop">Firefox desktop</option>
+                            <option value="fenix">Firefox for Android (Fenix)</option>
+                            <option value="fennec">Firefox for Android (Fennec)</option>
+                            <option value="fennec_ios">Firefox for iOS</option>
+                            <option value="other">Other</option>
+                            <option value="web">Web properties</option>
+                            <option value="many">Many products</option>
+
+                        </select> </div>
+                </div>
+                <div id="div_id_topic" class="form-group"> <label for="id_topic" class="">
+                        Topics
+                    </label>
+                    <div class=""> <select name="topic" size="15" class="selectmultiple form-control" id="id_topic"
+                            multiple>
+                            <option value="accounts">Accounts</option>
+                            <option value="activity_stream">Activity Stream</option>
+                            <option value="addons">Add-ons</option>
+                            <option value="bookmarks">Bookmarks</option>
+                            <option value="devtools">Devtools</option>
+                            <option value="download">Download page</option>
+                            <option value="enterprise">Enterprise</option>
+                            <option value="geo">Geolocation</option>
+                            <option value="heartbeat">Heartbeat</option>
+                            <option value="nav">Navigation</option>
+                            <option value="newtab">New tab</option>
+                            <option value="marketing">Marketing campaign</option>
+                            <option value="onboarding">Onboarding</option>
+                            <option value="pwmgr">Password manager</option>
+                            <option value="payments">Payments</option>
+                            <option value="percperf">Perceived performance</option>
+                            <option value="perf">Performance</option>
+                            <option value="platform">Platform</option>
+                            <option value="pocket">Pocket</option>
+                            <option value="privacy">Privacy</option>
+                            <option value="search">Search</option>
+                            <option value="security">Security</option>
+                            <option value="services">Services</option>
+                            <option value="tp">Tracking Protection</option>
+                            <option value="vpn">VPN</option>
+
+                        </select> <small id="hint_id_topic" class="form-text text-muted">Please specify at least one
+                            topic or
+                            tag.
+                            Ctrl- or ⌘-click to select multiple topics.</small> </div>
+                </div>
+                <div id="div_id_tags" class="form-group"> <label for="id_tags" class="">
+                        Tags
+                    </label>
+                    <div class=""> <input type="text" name="tags" maxlength="1024"
+                            class="textinput textInput form-control" id="id_tags"> <small id="hint_id_tags"
+                            class="form-text text-muted">Comma-separated list of any
+                            additional tags you'd like to apply.</small> </div>
+                </div>
+            </form>
+        </div>
+        <div class="row pt-4"><button class="btn btn-lg btn-outline-primary" type="button" id="compute">✨ Compute
+                ✨</button></div>
+        <div class="row pt-4"><textarea rows="15" id="result" spellcheck="false" hidden></textarea></div>
+    </div>
+
+    <script>
+        document.getElementById("compute").onclick = function (e) {
+            let lines = [];
+
+            f = id => JSON.stringify(document.getElementById(id).value.trim());
+            let multiselect_values = function (id) {
+                let values = [];
+                for (const o of document.getElementById(id).selectedOptions) {
+                    values.push(o.value);
+                }
+                return values;
+            }
+            let tags = document.getElementById("id_tags").value.split(",").map(s => s.trim());
+
+            lines.push(`title = ${f("id_title")}`);
+            lines.push(`publish_date = ${f("id_completed_date")}`);
+            lines.push(`link = ${f("id_deliverable")}`);
+            lines.push(`artifacts = ${f("id_artifact")}`);
+            lines.push(`abstract = """${document.getElementById("id_abstract").value.trim()}"""`)
+            lines.push(`products = ${f("id_product")}`);
+            lines.push(`areas = ${JSON.stringify(multiselect_values("id_topic"))}`);
+            lines.push(`tags = ${JSON.stringify(tags)}`)
+
+            let textbox = document.getElementById("result");
+            textbox.value = lines.join("\n");
+            textbox.hidden = false;
+        }
+    </script>
+</body>
+
+</html>
