@@ -59,8 +59,7 @@
                         Tl;dr
                     </label>
                     <div class=""> <textarea name="abstract" cols="40" rows="10" class="textarea form-control"
-                            id="id_abstract">
-        </textarea> <small id="hint_id_abstract" class="form-text text-muted"><a
+                            id="id_abstract"></textarea> <small id="hint_id_abstract" class="form-text text-muted"><a
                                 href='https://docs.google.com/document/d/1QiymsHOvyNoaSL5GfY_9yWMOl8qAZy6yomTld3Twfws/edit'>How
                                 to
                                 write an abstract</a></small> </div>
@@ -128,13 +127,13 @@
         </div>
         <div class="row pt-4"><button class="btn btn-lg btn-outline-primary" type="button" id="compute">✨ Compute
                 ✨</button></div>
-        <div class="row pt-4" id="drawer" hidden>
-            <form action="https://github.com/mozilla-services/mozilla-private-reports/new/master" method="GET">
-                <p><textarea rows="15" id="result" spellcheck="false" name="value"></textarea></p>
+        <form action="https://github.com/mozilla-services/mozilla-private-reports/new/master" method="GET">
+            <div class="row pt-4" id="drawer" hidden>
+                <textarea rows="15" id="result" spellcheck="false" name="value" class="form-control"></textarea>
                 <input type="hidden" name="filename" id="filename">
-                <p><button class="btn btn-lg btn-outline-primary" type="submit" id="compute">✨ Send to Github ✨</button></p>
-            </form>
-        </div>
+                <button class="btn btn-lg btn-outline-primary mt-4" type="submit" id="compute">✨ Send to Github ✨</button>
+            </div>
+        </form>
     </div>
 
     <script>
@@ -160,12 +159,12 @@
             lines.push(`areas = ${JSON.stringify(multiselect_values("id_topic"))}`);
             lines.push(`tags = ${JSON.stringify(tags)}`)
 
-            let title = document.getElementById("id_title").value.trim();
-            let slug = title.replaceAll(/[^a-zA-Z0-9_-]+/g, "_");
+            const title = document.getElementById("id_title").value.trim();
+            const slug = title.replaceAll(/[^a-zA-Z0-9_-]+/g, "_");
 
-            let drawer = document.getElementById("drawer");
-            let textbox = document.getElementById("result");
-            let filename_box = document.getElementById("filename");
+            const drawer = document.getElementById("drawer");
+            const textbox = document.getElementById("result");
+            const filename_box = document.getElementById("filename");
             filename_box.value = `external/${slug}.toml`;
             textbox.value = lines.join("\n");
             drawer.hidden = false;
