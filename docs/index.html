@@ -25,7 +25,8 @@
                         Author
                     </label>
                     <div class=""> <input type="text" name="author" value="" maxlength="1024"
-                            class="textinput textInput form-control" id="id_author" placeholder="Mo Zilla <mzilla@mozilla.com>"> </div>
+                            class="textinput textInput form-control" id="id_author"
+                            placeholder="Mo Zilla <mzilla@mozilla.com>"> </div>
                 </div>
                 <div id="div_id_completed_date" class="form-group"> <label for="id_completed_date" class="">
                         Completed date
@@ -127,7 +128,13 @@
         </div>
         <div class="row pt-4"><button class="btn btn-lg btn-outline-primary" type="button" id="compute">✨ Compute
                 ✨</button></div>
-        <div class="row pt-4"><textarea rows="15" id="result" spellcheck="false" hidden></textarea></div>
+        <div class="row pt-4" id="drawer" hidden>
+            <form action="https://github.com/mozilla-services/mozilla-private-reports/new/master" method="GET">
+                <p><textarea rows="15" id="result" spellcheck="false" name="value"></textarea></p>
+                <input type="hidden" name="filename" id="filename">
+                <p><button class="btn btn-lg btn-outline-primary" type="submit" id="compute">✨ Send to Github ✨</button></p>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -153,9 +160,16 @@
             lines.push(`areas = ${JSON.stringify(multiselect_values("id_topic"))}`);
             lines.push(`tags = ${JSON.stringify(tags)}`)
 
+            let title = document.getElementById("id_title").value.trim();
+            let slug = title.replaceAll(/[^a-zA-Z0-9_-]+/g, "_");
+
+            let drawer = document.getElementById("drawer");
             let textbox = document.getElementById("result");
+            let filename_box = document.getElementById("filename");
+            filename_box.value = `external/${slug}.toml`;
             textbox.value = lines.join("\n");
-            textbox.hidden = false;
+            drawer.hidden = false;
+            window.scrollBy(0, window.innerHeight);
         }
     </script>
 </body>
