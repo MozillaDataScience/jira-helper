@@ -148,9 +148,10 @@
                 }
                 return values;
             }
-            let tags = document.getElementById("id_tags").value.split(",").map(s => s.trim());
+            const tags = document.getElementById("id_tags").value.split(",").map(s => s.trim());
 
             lines.push(`title = ${f("id_title")}`);
+            lines.push(`authors = [${f("id_author")}]`);
             lines.push(`publish_date = ${f("id_completed_date")}`);
             lines.push(`link = ${f("id_deliverable")}`);
             lines.push(`artifacts = ${f("id_artifact")}`);
