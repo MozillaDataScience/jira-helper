@@ -47,11 +47,11 @@
                     </label>
                     <div class=""> <select name="artifact" class="select form-control" id="id_artifact">
                             <option value="" selected>---------</option>
-                            <option value="dashboard">Dashboard</option>
-                            <option value="experiment">Experiment</option>
-                            <option value="investigation">Investigation report</option>
-                            <option value="survey">Survey</option>
-                            <option value="other">Other</option>
+                            <option>Dashboard</option>
+                            <option>Experiment</option>
+                            <option>Investigation report</option>
+                            <option>Survey</option>
+                            <option>Other</option>
 
                         </select> </div>
                 </div>
@@ -67,16 +67,14 @@
                 <div id="div_id_product" class="form-group"> <label for="id_product" class="">
                         Product
                     </label>
-                    <div class=""> <select name="product" class="select form-control" id="id_product">
-                            <option value="" selected>---------</option>
-                            <option value="desktop">Firefox desktop</option>
-                            <option value="fenix">Firefox for Android (Fenix)</option>
-                            <option value="fennec">Firefox for Android (Fennec)</option>
-                            <option value="fennec_ios">Firefox for iOS</option>
-                            <option value="other">Other</option>
-                            <option value="web">Web properties</option>
-                            <option value="many">Many products</option>
-
+                    <div class=""> <select name="product" class="selectmultiple form-control" id="id_product" size="6"
+                            multiple>
+                            <option>Firefox desktop</option>
+                            <option>Firefox for Android (Fenix)</option>
+                            <option>Firefox for Android (Fennec)</option>
+                            <option>Firefox for iOS</option>
+                            <option>Other</option>
+                            <option>Web properties</option>
                         </select> </div>
                 </div>
                 <div id="div_id_topic" class="form-group"> <label for="id_topic" class="">
@@ -84,31 +82,31 @@
                     </label>
                     <div class=""> <select name="topic" size="15" class="selectmultiple form-control" id="id_topic"
                             multiple>
-                            <option value="accounts">Accounts</option>
-                            <option value="activity_stream">Activity Stream</option>
-                            <option value="addons">Add-ons</option>
-                            <option value="bookmarks">Bookmarks</option>
-                            <option value="devtools">Devtools</option>
-                            <option value="download">Download page</option>
-                            <option value="enterprise">Enterprise</option>
-                            <option value="geo">Geolocation</option>
-                            <option value="heartbeat">Heartbeat</option>
-                            <option value="nav">Navigation</option>
-                            <option value="newtab">New tab</option>
-                            <option value="marketing">Marketing campaign</option>
-                            <option value="onboarding">Onboarding</option>
-                            <option value="pwmgr">Password manager</option>
-                            <option value="payments">Payments</option>
-                            <option value="percperf">Perceived performance</option>
-                            <option value="perf">Performance</option>
-                            <option value="platform">Platform</option>
-                            <option value="pocket">Pocket</option>
-                            <option value="privacy">Privacy</option>
-                            <option value="search">Search</option>
-                            <option value="security">Security</option>
-                            <option value="services">Services</option>
-                            <option value="tp">Tracking Protection</option>
-                            <option value="vpn">VPN</option>
+                            <option>Accounts</option>
+                            <option>Activity Stream</option>
+                            <option>Add-ons</option>
+                            <option>Bookmarks</option>
+                            <option>Devtools</option>
+                            <option>Download page</option>
+                            <option>Enterprise</option>
+                            <option>Geolocation</option>
+                            <option>Heartbeat</option>
+                            <option>Navigation</option>
+                            <option>New tab</option>
+                            <option>Marketing campaign</option>
+                            <option>Onboarding</option>
+                            <option>Password manager</option>
+                            <option>Payments</option>
+                            <option>Perceived performance</option>
+                            <option>Performance</option>
+                            <option>Platform</option>
+                            <option>Pocket</option>
+                            <option>Privacy</option>
+                            <option>Search</option>
+                            <option>Security</option>
+                            <option>Services</option>
+                            <option>Tracking Protection</option>
+                            <option>VPN</option>
 
                         </select> <small id="hint_id_topic" class="form-text text-muted">Please specify at least one
                             topic or
@@ -156,7 +154,7 @@
             lines.push(`link = ${f("id_deliverable")}`);
             lines.push(`artifacts = ${f("id_artifact")}`);
             lines.push(`abstract = """${document.getElementById("id_abstract").value.trim()}"""`)
-            lines.push(`products = ${f("id_product")}`);
+            lines.push(`products = ${JSON.stringify(multiselect_values("id_product"))}`);
             lines.push(`areas = ${JSON.stringify(multiselect_values("id_topic"))}`);
             lines.push(`tags = ${JSON.stringify(tags)}`)
 
