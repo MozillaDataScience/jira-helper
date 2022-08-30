@@ -51,6 +51,7 @@
                             <option>Experiment</option>
                             <option>Investigation report</option>
                             <option>Survey</option>
+                            <option>Methodology</option>
                             <option>Other</option>
 
                         </select> </div>
@@ -73,8 +74,14 @@
                             <option>Firefox for Android (Fenix)</option>
                             <option>Firefox for Android (Fennec)</option>
                             <option>Firefox for iOS</option>
-                            <option>Other</option>
+                            <option>Focus for Android</option>
+                            <option>Focus for iOS</option>
+                            <option>Firefox Suggest</option>
+                            <option>Sponsored Tiles</option>
+                            <option>Pocket</option>
+                            <option>VPN</option>
                             <option>Web properties</option>
+                            <option>Other</option>
                         </select> </div>
                 </div>
                 <div id="div_id_topic" class="form-group"> <label for="id_topic" class="">
@@ -105,9 +112,10 @@
                             <option>Search</option>
                             <option>Security</option>
                             <option>Services</option>
+                            <option>Suggest</option>
                             <option>Tracking Protection</option>
                             <option>VPN</option>
-
+                        
                         </select> <small id="hint_id_topic" class="form-text text-muted">Please specify at least one
                             topic or
                             tag.
@@ -125,7 +133,7 @@
         </div>
         <div class="row pt-4"><button class="btn btn-lg btn-outline-primary" type="button" id="compute">✨ Compute
                 ✨</button></div>
-        <form action="https://github.com/mozilla-services/mozilla-private-reports/new/master" method="GET">
+        <form action="https://github.com/mozilla-services/mozilla-private-reports/new/main" method="GET">
             <div class="row pt-4" id="drawer" hidden>
                 <textarea rows="15" id="result" spellcheck="false" name="value" class="form-control"></textarea>
                 <input type="hidden" name="filename" id="filename">
